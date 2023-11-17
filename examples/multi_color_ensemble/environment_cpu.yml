@@ -4,12 +4,13 @@ channels:
   - rapidsai
   - conda-forge
   - defaults
+  - pytorch
 dependencies:
-  - cellpose
-  - coin-or-cbc
-  - cucim
+  - cellpose  #  conda install -c conda-forge cellpose
+  - coin-or-cbc  #  conda install -c conda-forge coin-or-cbc
+  - cucim  #  conda install -c rapidsai-nightly cucim
   - cpuonly
-  - gurobi
+  - gurobi  #  conda install -c gurobi gurobi
   - jupyter
   - pip
   - pyqt
@@ -19,3 +20,12 @@ dependencies:
     - traccuracy
     - napari-arboretum
     - pyift
+
+#only need to install:
+pip install pyift
+python -m pip install cellpose
+pip install tensorflow-cpu
+pip install cchardet
+python -m pip install gurobipy
+pip install chardet
+pip install -U --force-reinstall charset-normalizer  
