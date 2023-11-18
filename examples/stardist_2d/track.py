@@ -1,0 +1,58 @@
+# stardist / tensorflow env variables setup
+import os
+import numpy as np
+from rich.pretty import pprint
+import pickle
+from ultrack import track, to_tracks_layer, tracks_to_zarr
+from ultrack.utils import estimate_parameters_from_labels, labels_to_edges
+from ultrack.config import MainConfig
+import pandas as pd
+
+if __name__ == "__main__":
+
+    os.environ["OMP_NUM_THREADS"] = "4"
+    os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+
+    stardist_labels = np.load('data/stardist_labels.npy')
+    detection, edges = labels_to_edges(stardist_labels,
+                                       sigma=4.0)  # multiple labels can be used with [labels_0, labels_1, ...]
+    np.save('data/detection.npy', detection)
+    np.save('data/edges.npy', edges)
+    config = MainConfig()
+    pprint(config)
+
+    params_df = estimate_parameters_from_labels(stardist_labels, is_timelapse=True)
+    params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
+
+    config.segmentation_config.min_area = 50
+    config.segmentation_config.max_area = 950
+    config.segmentation_config.n_workers = 8
+
+    config.linking_config.max_distance = 25
+    config.linking_config.n_workers = 8
+
+    config.tracking_config.appear_weight = -1
+    config.tracking_config.disappear_weight = -1
+    config.tracking_config.division_weight = -0.1
+    config.tracking_config.power = 4
+    config.tracking_config.bias = -0.001
+    config.tracking_config.solution_gap = 0.0
+
+    pprint(config)
+
+    track(
+        detection=detection,
+        edges=edges,
+        config=config,
+        overwrite=True,
+    )
+
+    tracks_df, graph = to_tracks_layer(config)
+    labels = tracks_to_zarr(config, tracks_df)
+    pd.to_pickle(tracks_df, 'data/tracks.pkl', )
+    with open('data/graph.pkl', 'wb') as f:
+        pickle.dump(graph, f)
+    np.save('data/labels.npy', labels)
+
+
+    print()
