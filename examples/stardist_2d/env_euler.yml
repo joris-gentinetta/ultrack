@@ -5,15 +5,14 @@ channels:
   - defaults
   - gurobi
 dependencies:
-  - python=3.10
-  - rapidsai::cucim
-  - conda-forge::cudatoolkit
-  - conda-forge::cudnn
-  - conda-forge::tensorflow-gpu
-  - conda-forge::cupy
+  - python=3.9
+  - cucim
+  - cudatoolkit
+  - cudnn
+  - tensorflow-gpu
+  - cupy
   - coin-or-cbc
   - gurobi
-#  - jupyter
   - pytorch
   - pip
   - zarr
