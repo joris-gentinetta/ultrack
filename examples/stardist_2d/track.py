@@ -1,5 +1,6 @@
 # stardist / tensorflow env variables setup
 import os
+from os.path import join
 import numpy as np
 from rich.pretty import pprint
 import pickle
@@ -9,15 +10,16 @@ from ultrack.config import MainConfig
 import pandas as pd
 
 if __name__ == "__main__":
+    data_dir = "/cluster/scratch/jorisg/data"
 
     os.environ["OMP_NUM_THREADS"] = "4"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-    stardist_labels = np.load('data/stardist_labels.npy')
+    stardist_labels = np.load(join(data_dir, 'stardist_labels.npy'))
     detection, edges = labels_to_edges(stardist_labels,
                                        sigma=4.0)  # multiple labels can be used with [labels_0, labels_1, ...]
-    np.save('data/detection.npy', detection)
-    np.save('data/edges.npy', edges)
+    np.save('detection.npy', detection)
+    np.save(join(data_dir, 'edges.npy'), edges)
     config = MainConfig()
     pprint(config)
 
@@ -49,10 +51,10 @@ if __name__ == "__main__":
 
     tracks_df, graph = to_tracks_layer(config)
     labels = tracks_to_zarr(config, tracks_df)
-    pd.to_pickle(tracks_df, 'data/tracks.pkl', )
-    with open('data/graph.pkl', 'wb') as f:
+    pd.to_pickle(tracks_df, join(data_dir, 'tracks.pkl'))
+    with open(join(data_dir, 'graph.pkl'), 'wb') as f:
         pickle.dump(graph, f)
-    np.save('data/labels.npy', labels)
+    np.save(join(data_dir, 'labels.npy'), labels)
 
 
     print()

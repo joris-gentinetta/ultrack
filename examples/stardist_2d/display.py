@@ -12,6 +12,8 @@ import pandas as pd
 
 from tifffile import imread
 
+#rsync to local using os:
+os.system('rsync -avz --progress jorisg@euler.ethz.ch:/cluster/scratch/jorisg/data/ data/')
 # (T, Y, X, C) data, where T=time, Y, X =s patial coordinates and C=channels
 img_path = Path("../data/test.tif")
 

@@ -1,5 +1,6 @@
 # stardist / tensorflow env variables setup
 import os
+from os.path import join
 
 os.environ["OMP_NUM_THREADS"] = "2"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
@@ -11,8 +12,10 @@ from pathlib import Path
 import numpy as np
 from segment_utils import normalize, array_apply
 
-# img_path = Path("/cluster/scratch/jorisg/data/test.tif")
-img_path = Path("../data/test.tif")
+data_dir = Path("/cluster/scratch/jorisg/data")
+img_path = join(data_dir, "test.tif")
+
+# img_path = Path("../data/test.tif")
 n_frames = 2
 
 imgs = imread(img_path)
@@ -45,5 +48,5 @@ array_apply(
 )
 
 # store np array: stardist_labels:
-os.makedirs('data', exist_ok=True)
-np.save('data/stardist_labels.npy', stardist_labels)
+os.makedirs(data_dir, exist_ok=True)
+np.save(join(data_dir, 'stardist_labels.npy'), stardist_labels)
