@@ -24,7 +24,7 @@ dependencies:
 #only need to install:
 pip install pyift
 python -m pip install cellpose
-pip install tensorflow-cpu
+pip install tensorflow
 pip install cchardet
 python -m pip install gurobipy
 pip install chardet
