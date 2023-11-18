@@ -1,7 +1,4 @@
-conda update -n base conda
-conda install -n base conda-libmamba-solver
-conda config --set solver libmamba
-
+conda env remove -p /cluster/scratch/jorisg/conda/segment_stardist -y
 conda create --prefix /cluster/scratch/jorisg/conda/segment_stardist python=3.10 -y
 conda activate /cluster/scratch/jorisg/conda/segment_stardist || exit
 pip install tensorflow

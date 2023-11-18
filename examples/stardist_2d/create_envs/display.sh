@@ -1,7 +1,5 @@
-conda update -n base conda
-conda install -n base conda-libmamba-solver
-conda config --set solver libmamba
 
+conda env remove -p /cluster/scratch/jorisg/conda/display -y
 conda create -n display python=3.10 -y
 conda activate display || exit
 conda install -c conda-forge napari pyqt

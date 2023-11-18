@@ -1,7 +1,5 @@
-conda update -n base conda
-conda install -n base conda-libmamba-solver
-conda config --set solver libmamba
 
+conda env remove -p /cluster/scratch/jorisg/conda/track -y
 conda create --prefix /cluster/scratch/jorisg/conda/track python=3.10 -y
 conda activate /cluster/scratch/jorisg/conda/track || exit
 cd ../../../.. || exit
