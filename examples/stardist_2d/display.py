@@ -60,3 +60,4 @@ viewer.add_labels(labels)
 
 viewer.layers["stardist"].visible = False
 viewer.layers["edges"].visible = False
+napari.run()

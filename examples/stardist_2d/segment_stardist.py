@@ -18,7 +18,7 @@ from segment_utils import normalize, array_apply
 data_dir = join(Path(__file__).parent.parent, "data")
 img_path = join(data_dir, "test.tif")
 
-n_frames = 2
+n_frames = 200
 
 imgs = imread(img_path)
 imgs = imgs[:, 1:, :, :]
