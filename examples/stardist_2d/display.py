@@ -13,8 +13,9 @@ import pandas as pd
 from tifffile import imread
 
 #rsync to local using os:
+data_dir = join(Path(__file__).parent.parent, "data")
 # os.system('rsync -avz --progress jorisg@euler.ethz.ch:/cluster/scratch/jorisg/data/ data/')
-os.system('rsync -avz --progress jorisg@192.168.1.203:/home/jorisg/ultrack/examples/data/ data/')
+os.system(f'rsync -avz --progress jorisg@192.168.1.203:/home/jorisg/ultrack/examples/data/ {data_dir}/')
 
 # (T, Y, X, C) data, where T=time, Y, X =s patial coordinates and C=channels
 data_dir = join(Path(__file__).parent.parent, "data")
@@ -42,18 +43,18 @@ viewer.window.resize(1800, 1000)
 # viewer.open(sorted(dataset_path.glob("*.tif")), stack=True)
 layers = viewer.add_image(imgs, channel_axis=3, name="raw")
 
-stardist_labels = np.load('data/stardist_labels.npy')
+stardist_labels = np.load(join(data_dir, 'stardist_labels.npy'))
 viewer.add_labels(stardist_labels, name="stardist")
 
-detection = np.load('data/detection.npy')
-edges = np.load('data/edges.npy')
+detection = np.load(join(data_dir, 'detection.npy'))
+edges = np.load(join(data_dir, 'edges.npy'))
 viewer.add_image(detection, visible=False)
 viewer.add_image(edges, blending="additive", colormap="magma")
 
-tracks_df = pd.read_pickle('data/tracks.pkl')
-with open('data/graph.pkl', 'rb') as f:
+tracks_df = pd.read_pickle(join(data_dir, 'tracks.pkl'))
+with open(join(data_dir, 'graph.pkl'), 'rb') as f:
     graph = pickle.load(f)
-labels = np.load('data/labels.npy')
+labels = np.load(join(data_dir, 'labels.npy'))
 viewer.add_tracks(tracks_df[["track_id", "t", "y", "x"]].values, graph=graph)
 viewer.add_labels(labels)
 

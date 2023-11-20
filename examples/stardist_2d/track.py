@@ -20,7 +20,7 @@ if __name__ == "__main__":
     stardist_labels = np.load(join(data_dir, 'stardist_labels.npy'))
     detection, edges = labels_to_edges(stardist_labels,
                                        sigma=4.0)  # multiple labels can be used with [labels_0, labels_1, ...]
-    np.save('detection.npy', detection)
+    np.save(join(data_dir, 'detection.npy'), detection)
     np.save(join(data_dir, 'edges.npy'), edges)
     config = MainConfig()
     pprint(config)
