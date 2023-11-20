@@ -1,5 +1,6 @@
 # stardist / tensorflow env variables setup
 import os
+from pathlib import Path
 from os.path import join
 import numpy as np
 from rich.pretty import pprint
@@ -10,9 +11,10 @@ from ultrack.config import MainConfig
 import pandas as pd
 
 if __name__ == "__main__":
-    data_dir = "/cluster/scratch/jorisg/data"
+    # data_dir = "/cluster/scratch/jorisg/data"
+    data_dir = join(Path(__file__).parent.parent, "data")
 
-    os.environ["OMP_NUM_THREADS"] = "4"
+    os.environ["OMP_NUM_THREADS"] = "20"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
     stardist_labels = np.load(join(data_dir, 'stardist_labels.npy'))

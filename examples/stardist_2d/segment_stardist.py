@@ -2,7 +2,7 @@
 import os
 from os.path import join
 
-os.environ["OMP_NUM_THREADS"] = "2"
+os.environ["OMP_NUM_THREADS"] = "20"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 from stardist.models import StarDist2D
@@ -12,10 +12,12 @@ from pathlib import Path
 import numpy as np
 from segment_utils import normalize, array_apply
 
-data_dir = Path("/cluster/scratch/jorisg/data")
+# data_dir = Path("/cluster/scratch/jorisg/data")
+#data is one folder up:
+# data_dir = Path("../data") #better:
+data_dir = join(Path(__file__).parent.parent, "data")
 img_path = join(data_dir, "test.tif")
 
-# img_path = Path("../data/test.tif")
 n_frames = 2
 
 imgs = imread(img_path)

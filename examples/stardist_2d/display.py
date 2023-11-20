@@ -1,7 +1,7 @@
 # stardist / tensorflow env variables setup
 import os
-
-os.environ["OMP_NUM_THREADS"] = "8"
+from os.path import join
+os.environ["OMP_NUM_THREADS"] = "10"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 from pathlib import Path
@@ -13,9 +13,13 @@ import pandas as pd
 from tifffile import imread
 
 #rsync to local using os:
-os.system('rsync -avz --progress jorisg@euler.ethz.ch:/cluster/scratch/jorisg/data/ data/')
+# os.system('rsync -avz --progress jorisg@euler.ethz.ch:/cluster/scratch/jorisg/data/ data/')
+os.system('rsync -avz --progress jorisg@192.168.1.203:/home/jorisg/ultrack/examples/data/ data/')
+
 # (T, Y, X, C) data, where T=time, Y, X =s patial coordinates and C=channels
-img_path = Path("../data/test.tif")
+data_dir = join(Path(__file__).parent.parent, "data")
+
+img_path = Path(join(data_dir, "test.tif"))
 
 # optional, useful for a quick look
 # for all frames `n_frames = None`

@@ -1,5 +1,5 @@
 
 conda env remove -p /cluster/scratch/jorisg/conda/display -y
-conda create -n display python=3.10 -y
-conda activate display || exit
+conda create --prefix /cluster/scratch/jorisg/conda/ python=3.10 -y
+conda activate -p /cluster/scratch/jorisg/conda/ display || exit
 conda install -c conda-forge napari pyqt
