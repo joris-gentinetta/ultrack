@@ -41,7 +41,7 @@ if __name__ == "__main__":
     config.tracking_config.division_weight = -0.1
     config.tracking_config.power = 4
     config.tracking_config.bias = -0.001
-    config.tracking_config.solution_gap = 0.0
+    config.tracking_config.solution_gap = 0.003 #todo
 
     pprint(config)
 
