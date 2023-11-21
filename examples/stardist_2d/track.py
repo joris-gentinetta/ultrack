@@ -14,7 +14,7 @@ if __name__ == "__main__":
     # data_dir = "/cluster/scratch/jorisg/data"
     data_dir = join(Path(__file__).parent.parent, "data")
 
-    os.environ["OMP_NUM_THREADS"] = "20"
+    os.environ["OMP_NUM_THREADS"] = "40"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
     stardist_labels = np.load(join(data_dir, 'stardist_labels.npy'))
@@ -29,12 +29,12 @@ if __name__ == "__main__":
     params_df.to_csv(join(data_dir, 'params.csv'))
     # params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
 
-    config.segmentation_config.min_area = 50
-    config.segmentation_config.max_area = 950
-    config.segmentation_config.n_workers = 8
+    config.segmentation_config.min_area = 20
+    config.segmentation_config.max_area = 200
+    config.segmentation_config.n_workers = 40
 
     config.linking_config.max_distance = 25
-    config.linking_config.n_workers = 8
+    config.linking_config.n_workers = 40
 
     config.tracking_config.appear_weight = -1
     config.tracking_config.disappear_weight = -1

@@ -9,7 +9,7 @@ import pickle
 import napari
 import numpy as np
 import pandas as pd
-
+import matplotlib.pyplot as plt
 from tifffile import imread
 
 #rsync to local using os:
@@ -25,7 +25,8 @@ img_path = Path(join(data_dir, "test.tif"))
 n_frames = 200
 
 params_df = pd.read_csv(join(data_dir, 'params.csv'), index_col=0)
-
+params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
+plt.show()
 imgs = imread(img_path)
 imgs = imgs[:, 1:, :, :]
 
