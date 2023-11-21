@@ -26,7 +26,8 @@ if __name__ == "__main__":
     pprint(config)
 
     params_df = estimate_parameters_from_labels(stardist_labels, is_timelapse=True)
-    params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
+    params_df.to_csv(join(data_dir, 'params.csv'))
+    # params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
 
     config.segmentation_config.min_area = 50
     config.segmentation_config.max_area = 950

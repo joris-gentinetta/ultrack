@@ -22,9 +22,9 @@ data_dir = join(Path(__file__).parent.parent, "data")
 
 img_path = Path(join(data_dir, "test.tif"))
 
-# optional, useful for a quick look
-# for all frames `n_frames = None`
-n_frames = 2
+n_frames = 200
+
+params_df = pd.read_csv(join(data_dir, 'params.csv'), index_col=0)
 
 imgs = imread(img_path)
 imgs = imgs[:, 1:, :, :]
