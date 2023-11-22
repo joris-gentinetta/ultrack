@@ -9,8 +9,11 @@ from ultrack import track, to_tracks_layer, tracks_to_zarr
 from ultrack.utils import estimate_parameters_from_labels, labels_to_edges
 from ultrack.config import MainConfig
 import pandas as pd
+from time import time
 
 if __name__ == "__main__":
+    start_time = time()
+
     # data_dir = "/cluster/scratch/jorisg/data"
     data_dir = join(Path(__file__).parent.parent, "data")
 
@@ -59,5 +62,6 @@ if __name__ == "__main__":
         pickle.dump(graph, f)
     np.save(join(data_dir, 'labels.npy'), labels)
 
+    end_time = time()
+    print(f"Total time: {(end_time - start_time)/60} minutes")
 
-    print()
