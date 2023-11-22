@@ -29,11 +29,11 @@ if __name__ == "__main__":
     params_df.to_csv(join(data_dir, 'params.csv'))
     # params_df["area"].plot(kind="hist", bins=100, title="Area histogram")
 
-    config.segmentation_config.min_area = 20
+    config.segmentation_config.min_area = 50
     config.segmentation_config.max_area = 200
     config.segmentation_config.n_workers = 40
 
-    config.linking_config.max_distance = 25
+    config.linking_config.max_distance = 10
     config.linking_config.n_workers = 40
 
     config.tracking_config.appear_weight = -1
